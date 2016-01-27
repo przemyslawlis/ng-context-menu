@@ -106,7 +106,7 @@
               if (!$scope.disabled() &&
                 opened &&
                 (event.button !== 2 ||
-                  event.target !== ContextMenuService.element) && !event.target.hasAttribute("ctx-no-close-on-click")) {
+                  event.target !== ContextMenuService.element) && !event.target.hasAttribute("ctx-no-close-on-click") && !event.target.classList.contains("ctx-no-close-on-click")) {
                 $scope.$apply(function() {
                   close(ContextMenuService.menuElement);
                 });
