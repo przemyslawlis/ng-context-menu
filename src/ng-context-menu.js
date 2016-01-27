@@ -103,10 +103,17 @@
             }
 
             function handleClickEvent(event) {
+              var ignore = false;
+              var el = event.target;
+              while (!ignore && el) {
+                  ignore = el.hasAttribute("ctx-no-close-on-click") || el.classList.contains("ctx-no-close-on-click");
+                  el = el.parentElement;
+              }
+                
               if (!$scope.disabled() &&
                 opened &&
                 (event.button !== 2 ||
-                  event.target !== ContextMenuService.element) && !event.target.hasAttribute("ctx-no-close-on-click") && !event.target.classList.contains("ctx-no-close-on-click")) {
+                  event.target !== ContextMenuService.element) && !ignore) {
                 $scope.$apply(function() {
                   close(ContextMenuService.menuElement);
                 });
